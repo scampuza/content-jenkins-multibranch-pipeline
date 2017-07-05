@@ -8,6 +8,7 @@ pipeline {
   stages {
     stage('build') {
       steps {
+         sh 'echo "Desde Staging...."'
         sh 'javac -d . src/*.java'
         sh 'echo Main-Class: Rectangulator > MANIFEST.MF'
         sh 'jar -cvmf MANIFEST.MF rectangle.jar *.class'
@@ -25,7 +26,7 @@ pipeline {
     }
     stage('Promote Development to Master') {
       when {
-        branch 'development'
+        branch 'staging'
       }
       steps {
         echo "Stashing Local Changes"
@@ -46,7 +47,7 @@ pipeline {
             subject: "${env.JOB_NAME} [${env.BUILD_NUMBER}] Development Promoted to Master",
             body: """<p>'${env.JOB_NAME} [${env.BUILD_NUMBER}]' Development Promoted to Master":</p>
             <p>Check console output at <a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a></p>""",
-            to: "brandon@linuxacademy.com"
+            to: "scampuza@gmail.com"
           )
         }
       }
