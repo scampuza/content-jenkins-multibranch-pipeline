@@ -3,6 +3,7 @@ pipeline {
 
   environment {
     MAJOR_VERSION = 1
+    BUCKET = credentials('jenkins-aws-s3-spinnaker-demo-bucket')
   }
 
   stages {
