@@ -10,7 +10,7 @@ pipeline {
     stage('build') {
       steps {
         emailext(
-            subject: " NEW RELEASE",
+            subject: " NEW RELEASE of Test",
             body: """<p>'${env.BUCKET}' NEW RELEASE":</p>
             <p>Check console output at <a href='${env.BUCKET}</a></p>""",
             to: "scampuza@gmail.com"
