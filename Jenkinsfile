@@ -9,6 +9,12 @@ pipeline {
   stages {
     stage('build') {
       steps {
+        emailext(
+            subject: " NEW RELEASE",
+            body: """<p>'${env.BUCKET}' NEW RELEASE":</p>
+            <p>Check console output at <a href='${env.BUCKET}</a></p>""",
+            to: "scampuza@gmail.com"
+          )
         echo "El cubo es ${env.BUCKET}"
         sh 'javac -d . src/*.java'
         sh 'echo Main-Class: Rectangulator > MANIFEST.MF'
